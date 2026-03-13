@@ -23,7 +23,7 @@
     <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\Infra.Email\Infra.Email.csproj" />
     <ProjectReference Include="..\Infra.Messaging\Infra.Messaging.csproj" />
-    <ProjectReference Include="..\NotificationSenderWorker\NotificationWorker.csproj" />
+    <ProjectReference Include="..\NotificationSenderWorker\NotificationSenderWorker.csproj" />
   </ItemGroup>
 
   <ItemGroup>
