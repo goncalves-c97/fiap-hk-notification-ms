@@ -11,13 +11,13 @@ COPY Core/*.csproj ./Core/
 COPY Infra.Messaging/*.csproj ./Infra.Messaging/
 COPY Infra.Email/*.csproj ./Infra.Email/
 COPY Test/*.csproj ./Test/
-COPY NotificationWorker/*.csproj ./NotificationWorker/
+COPY NotificationSenderWorker/*.csproj ./NotificationSenderWorker/
 
 RUN dotnet restore
 
 COPY . .
 
-WORKDIR /src/NotificationWorker
+WORKDIR /src/NotificationSenderWorker
 RUN dotnet build -c Release -o /app/build
 
 FROM build AS publish
@@ -28,4 +28,4 @@ WORKDIR /app
 
 COPY --from=publish /app/publish .
 
-ENTRYPOINT ["dotnet", "NotificationWorker.dll"]
+ENTRYPOINT ["dotnet", "NotificationSenderWorker.dll"]
