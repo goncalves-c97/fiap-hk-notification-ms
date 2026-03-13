@@ -1,4 +1,5 @@
 using Core.Dtos;
+using Core.Enums;
 using Core.Events;
 using Core.Handlers;
 using Core.Interfaces;
@@ -52,6 +53,55 @@ public class VideoProcessedNotificationHandlerTests
             .ThrowsAsync(new InvalidOperationException("smtp failed"));
 
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => handler.HandleVideoProcessedSuccessfullyEventAsync(evt, emailService.Object));
+
+        Assert.Equal("smtp failed", exception.Message);
+    }
+
+    [Fact]
+    public async Task HandleVideoProcessingErrorEventAsync_ShouldBuildAndSendNotificationEmail()
+    {
+        var emailService = new Mock<IEmailService>(MockBehavior.Strict);
+        var handler = new VideoProcessedNotificationHandler();
+        var evt = new VideoProcessedEvent
+        {
+            UserEmail = "user@example.com",
+            OriginalVideoName = "frames.mp4",
+            StatusVideoEnum = StatusVideoEnum.ErrorAttemptsExceeded
+        };
+
+        emailService
+            .Setup(service => service.SendEmailAsync(It.IsAny<EmailRequestDto>()))
+            .Callback<EmailRequestDto>(email =>
+            {
+                Assert.Equal("user@example.com", email.ToEmail);
+                Assert.Equal("Houve um erro no processamento do seu vídeo!", email.Subject);
+                Assert.Contains("frames.mp4", email.Body);
+                Assert.Contains("após várias tentativas", email.Body);
+            })
+            .Returns(Task.CompletedTask);
+
+        await handler.HandleVideoProcessingErrorEventAsync(evt, emailService.Object);
+
+        emailService.Verify(service => service.SendEmailAsync(It.IsAny<EmailRequestDto>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task HandleVideoProcessingErrorEventAsync_WhenEmailServiceFails_ShouldRethrow()
+    {
+        var emailService = new Mock<IEmailService>(MockBehavior.Strict);
+        var handler = new VideoProcessedNotificationHandler();
+        var evt = new VideoProcessedEvent
+        {
+            UserEmail = "user@example.com",
+            OriginalVideoName = "frames.mp4",
+            StatusVideoEnum = StatusVideoEnum.Error
+        };
+
+        emailService
+            .Setup(service => service.SendEmailAsync(It.IsAny<EmailRequestDto>()))
+            .ThrowsAsync(new InvalidOperationException("smtp failed"));
+
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => handler.HandleVideoProcessingErrorEventAsync(evt, emailService.Object));
 
         Assert.Equal("smtp failed", exception.Message);
     }
