@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification-ms-webapi-deployment
+  namespace: notification-ms
+  labels:
+    app: notification-ms-webapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notification-ms-webapi
+  template:
+    metadata:
+      labels:
+        app: notification-ms-webapi
+    spec:
+      containers:
+      - name: notification-ms-webapi
+        image: goncalvesc97/fiap-hk-notification-ms:1.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+        env:
+        - name: ASPNETCORE_URLS
+          value: "http://+:5000"
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Development"
+
+        # Configuração do ambiente de banco de dados 
+        - name: DB_CONNECTION_STRING
+          valueFrom:
+            secretKeyRef:
+              name: notification-ms-secret
+              key: DB_CONNECTION_STRING
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: notification-ms-secret
+              key: DB_NAME
+
+        # Configuração da chave de autenticação da API
+        - name: API_AUTHENTICATION_KEY
+          valueFrom:
+            secretKeyRef:
+              name: notification-ms-secret
+              key: API_AUTH_TOKEN
