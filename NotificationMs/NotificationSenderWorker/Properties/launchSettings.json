@@ -1,0 +1,23 @@
+﻿{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "NotificationWorker": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "API_AUTHENTICATION_KEY": "Yf29qN58VfWbT1YtZz7jRkE4sLt9xP2eUqK3LmXvHsDcMgAjBwNvZxQrFtGvKyLz",
+        "DB_CONNECTION_STRING": "Server=localhost\\SQLEXPRESS;user=local_sa;password=1234;Trusted_Connection=True;TrustServerCertificate=True",
+        "DB_NAME": "VideoUploadDb",
+        "MESSAGING__HOST": "localhost",
+        "MESSAGING__USER": "admin",
+        "MESSAGING__PASSWORD": "admin123",
+        "EMAIL_SETTINGS__MAIL": "noreply.soat.fiap@gmail.com",
+        "EMAIL_SETTINGS__DISPLAY_NAME": "FastFoodChallenge",
+        "EMAIL_SETTINGS__HOST": "smtp.gmail.com",
+        "EMAIL_SETTINGS__PORT": "587",
+        "EMAIL_SETTINGS__PASSWORD": "sxrs rsip ydzk tuaj"
+      }
+    }
+  }
+}
