@@ -85,7 +85,7 @@ jobs:
       - name: Begin SonarCloud analysis
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: dotnet sonarscanner begin /k:"goncalves-c97_fiap-hk-notification-ms" /o:"goncalves-c97" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="$SONAR_TOKEN" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" /d:sonar.sources="NotificationMs/Core,NotificationMs/Infra.Data.SqlServer,NotificationMs/VideoProcessorWorker" /d:sonar.tests="NotificationMs/Test" /d:sonar.exclusions="**/wwwroot/**,**/*.cshtml,**/Program.cs"
+        run: dotnet sonarscanner begin /k:"goncalves-c97_fiap-hk-notification-ms" /o:"goncalves-c97" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="$SONAR_TOKEN" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" /d:sonar.sources="NotificationMs/Core,NotificationMs/Infra.Data.SqlServer,NotificationMs/NotificationSenderWorker" /d:sonar.tests="NotificationMs/Test" /d:sonar.exclusions="**/wwwroot/**,**/*.cshtml,**/Program.cs"
 
       - name: Build
         run: dotnet build NotificationMs/NotificationMs.sln --no-restore --configuration Release

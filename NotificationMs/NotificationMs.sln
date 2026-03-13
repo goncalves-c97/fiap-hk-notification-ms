@@ -24,7 +24,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.Messaging", "Infra.Messaging\Infra.Messaging.csproj", "{3FD90861-03D7-4EB8-AEF7-A7CF5BC496B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationWorker", "VideoProcessorWorker\NotificationWorker.csproj", "{2646C4FB-4E83-4F90-91E1-CDBE31B2A95E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationWorker", "NotificationSenderWorker\NotificationWorker.csproj", "{2646C4FB-4E83-4F90-91E1-CDBE31B2A95E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.Email", "Infra.Email\Infra.Email.csproj", "{369B37B3-4DC9-4D82-8B16-119E12EEC6E8}"
 EndProject

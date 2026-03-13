@@ -4,7 +4,6 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>dotnet-VideoProcessorWorker-ee76f27a-2cf6-44cd-97fb-ca71afc687c5</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
